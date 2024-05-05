@@ -1,0 +1,19 @@
+<!-- visu.html -->
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <h1>Visualização de Avaliações de Prestadores de Serviço</h1>
+    <ul>
+        {% for avaliacao in empresas %}
+        <li>
+            <p>Empresa: {{ avaliacao.empresa.nome }}</p>
+            <p>Avaliação: {{ avaliacao.classificacao }}</p>
+            <p>Comentários: {{ avaliacao.comentario }}</p>
+            <p>-----------------------------------------------------------------------------</p>
+        </li>
+        {% empty %}
+        <li>Nenhuma avaliação disponível.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

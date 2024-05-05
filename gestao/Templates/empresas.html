@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <h1>EMPRESAS PARCEIRAS</h1>
+    <ul>
+        {% for empresa in empresas %}
+        <li>
+            <p>Nome da Empresa: {{ empresa.nome }}</p>
+            <p>Segmento: {{ empresa.segmento }}</p>
+            <p>Contatos: {{empresa.contatos}} </p>
+            <p>Site: {{empresa.site}}</p>
+            <p>Descrição: {{empresa.descrição}}</p>
+            <p>-----------------------------------------------------------------------------</p>
+        </li>
+        {% empty %}
+        <li>Nenhuma avaliação disponível.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if not request.session.has_voted %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Detalhe </title>
+</head>
+
+<body>
+    <div>
+        <form action="{% url 'polls:vote' question.id %}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend>
+                    <h1>{{ question.question_text }}</h1>
+                </legend>
+
+                {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+                {% endif %}
+
+                {% for choice in question.choice_set.all %}
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                {% endfor %}
+
+                <br>
+                <input type="submit" value="vote">
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+</html>
+{% endif %}
+{% endblock %}
+
+{% block script %}
+<script>
+    // Verifica se o usuário já votou
+    if (localStorage.getItem('hasVoted')) {
+        document.getElementById("content").style.display = "none";
+    } else {
+        localStorage.setItem('hasVoted', true);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    .messages {
+      margin-bottom: 20px;
+    }
+
+    .messages li {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 style="color: #000000; text-align: center;">Enquetes Ativas</h1> 
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if latest_question_list %}
+    <ul>
+      {% for question in latest_question_list %}
+      <li>
+        <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>Não há enquetes disponíveis.</p>
+    {% endif %}
+  </div>
+</body>
+
+</html>
+{% endblock %}
